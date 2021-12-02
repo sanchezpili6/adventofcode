@@ -2005,9 +2005,23 @@ depths = [
 def sonar_sweep(depths):
     increased = 0
     for i, depth in enumerate(depths):
-        if i>= 1:
+        if i >= 1:
             if depth > depths[i-1]:
                 increased += 1
     return increased
 
-print(sonar_sweep(depths))
+
+def three_measurement(depths):
+    new_depths = []
+    increased = 0
+    for i, depth in enumerate(depths):
+        if i < len(depths)-2:
+            three_sum = depth + depths[i+1] + depths[i+2]
+            new_depths.append(three_sum)
+    for i, depth in enumerate(new_depths):
+        if i >= 1:
+            if depth > new_depths[i - 1]:
+                increased += 1
+    return increased
+
+print(three_measurement(depths))
