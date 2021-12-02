@@ -1014,4 +1014,19 @@ def dive(planned_course):
             depth += int(path.strip()[-1])
     return horizontal * depth
 
-print(dive(planned_course))
+
+def dive_with_aim(planned_course):
+    horizontal = 0
+    depth = 0
+    aim = 0
+    for path in planned_course:
+        if path.strip()[0] == 'f':
+            horizontal += int(path.strip()[-1])
+            depth += int(path.strip()[-1]) * aim
+        if path.strip()[0] == 'u':
+            aim -= int(path.strip()[-1])
+        if path.strip()[0] == 'd':
+            aim += int(path.strip()[-1])
+    return horizontal * depth
+
+print(dive_with_aim(planned_course))
