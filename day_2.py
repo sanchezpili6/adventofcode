@@ -1006,12 +1006,12 @@ def dive(planned_course):
     horizontal = 0
     depth = 0
     for path in planned_course:
-        if path.replace(' ', '')[0] == 'f':
-            horizontal += int(path.replace(' ', '')[-1])
-        if path.replace(' ', '')[0] == 'u':
-            depth -= int(path.replace(' ', '')[-1])
-        if path.replace(' ', '')[0] == 'd':
-            depth += int(path.replace(' ', '')[-1])
+        if path.strip()[0] == 'f':
+            horizontal += int(path.strip()[-1])
+        if path.strip()[0] == 'u':
+            depth -= int(path.strip()[-1])
+        if path.strip()[0] == 'd':
+            depth += int(path.strip()[-1])
     return horizontal * depth
 
 print(dive(planned_course))
