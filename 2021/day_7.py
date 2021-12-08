@@ -1,3 +1,5 @@
+import math
+
 crabs_position = [1101, 1, 29, 67, 1102, 0, 1, 65, 1008, 65, 35, 66, 1005, 66, 28, 1, 67, 65, 20, 4, 0, 1001, 65, 1, 65,
                   1106, 0, 8, 99, 35, 67, 101, 99, 105, 32, 110, 39, 101, 115, 116, 32, 112, 97, 115, 32, 117, 110, 101,
                   32, 105, 110, 116, 99, 111, 100, 101, 32, 112, 114, 111, 103, 114, 97, 109, 10, 867, 253, 111, 269,
@@ -48,24 +50,37 @@ crabs_position = [1101, 1, 29, 67, 1102, 0, 1, 65, 1008, 65, 35, 66, 1005, 66, 2
                   361, 664, 248, 1090, 86, 203, 241, 61, 329, 1551, 182, 790, 787, 408, 442, 603, 681, 522, 478, 1072,
                   527, 1094, 104, 1267, 418, 730, 217, 1198, 859]
 
+example = [16, 1, 2, 0, 4, 2, 7, 1, 2, 14]
 
-def get_best_crab_position(crab_list):
-    counter = 0
-    most_common_position = crab_list[0]
+
+def get_best_crab_position_1(crab_list):
+    crab_list.sort()
+    best_position = crab_list[len(crab_list)//2]
+    return best_position
+
+
+def get_best_crab_position_2(crab_list):
+    crabs_sum = 0
     for crab in crab_list:
-        current_frequency = crab_list.count(crab)
-        if current_frequency > counter:
-            counter = current_frequency
-            most_common_position = crab
-    return most_common_position
+        crabs_sum += crab
+    best_position = math.ceil(crabs_sum/len(crab_list))
+    return best_position
 
 
-def align_crabs(crab_list, best_position):
+def get_fuel_1(crab_list, best_position):
     needed_fuel = 0
     for crab in crab_list:
-        needed_fuel += abs(crab-best_position)
+        needed_fuel += abs(crab - best_position)
     return needed_fuel
 
 
-print(align_crabs(crabs_position, get_best_crab_position(crabs_position)))
+def get_fuel_2(crab_list, best_position):
+    needed_fuel = 0
+    for crab in crab_list:
+        diff = abs(crab - best_position)
+        needed_fuel += (diff * diff + diff//2)
+    return needed_fuel
 
+
+print(get_best_crab_position_2(crabs_position))
+print(get_fuel_2(crabs_position, get_best_crab_position_2(crabs_position)))
